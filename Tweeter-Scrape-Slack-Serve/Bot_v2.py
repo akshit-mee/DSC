@@ -12,7 +12,7 @@ CONSUMER_KEY = 'r31kBo3wl6XRx6Ev1VCVx'
 CONSUMER_SECRET = 'l1bHXu6mDBhkhMA00sFDVrBKBlzYpKtbWa6'
 ACCESS_TOKEN = '2407718186-iUj9NpRC9NxAhz10jbj8zYezim'
 ACCESS_SECRET = '0rJVp4j5bFk1nbNFoAc2fhLEBZKFLV34R8M'
-slack = Slacker('xoxb-10556560388466-euaQDZpyaHrUAjZRpQnpMKyE')
+slack = Slacker('xoxb-euaQDZpyaHrUAjZRpQnpMKyE')
 
 
 def twitter_setup():
