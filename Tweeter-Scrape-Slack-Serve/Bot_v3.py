@@ -3,7 +3,7 @@ import requests
 import sys
 import json
 from slacker import Slacker
-slack = Slacker('xoxb--1056560388466-euaQDZpyaHrUAjZRpQnpMKyE')
+slack = Slacker('xoxb-euaQDZpyaHrUAjZRpQnpMKyE')
 
 def get_tweet_text(tweet):
     tweet_text_box = tweet.find("p", {"class": "TweetTextSize TweetTextSize--normal js-tweet-text tweet-text"})
@@ -34,36 +34,34 @@ def get_tweets_data(username, soup):
 
     next_pointer = soup.find("div", {"class": "stream-container"})["data-min-position"]
     #for loading more tweets/ scroll down
-##    while True:
-##        next_url = "https://twitter.com/i/profiles/show/" + username + \
-##                   "/timeline/tweets?include_available_features=1&" \
-##                   "include_entities=1&max_position=" + next_pointer + "&reset_error_state=false"
-##
-##        next_response = None
-##        try:
-##            next_response = requests.get(next_url)
-##        except Exception as e:
-##            # in case there is some issue with request. None encountered so far.
-##            print(e)
-##            return tweets_list
-##
-##        tweets_data = next_response.text
-##        tweets_obj = json.loads(tweets_data)
-##        if not tweets_obj["has_more_items"] and not tweets_obj["min_position"]:
-##            # using two checks here bcz in one case has_more_items was false but there were more items
-##            print("\nNo more tweets returned")
-##            break
-##        next_pointer = tweets_obj["min_position"]
-##        html = tweets_obj["items_html"]
-##        soup = BeautifulSoup(html, 'lxml')
-##        tweets_list.extend(get_this_page_tweets(soup))
+    while True:
+        next_url = "https://twitter.com/i/profiles/show/" + username + \
+                   "/timeline/tweets?include_available_features=1&" \
+                   "include_entities=1&max_position=" + next_pointer + "&reset_error_state=false"
+
+        next_response = None
+        try:
+            next_response = requests.get(next_url)
+        except Exception as e:
+            # in case there is some issue with request. None encountered so far.
+            print(e)
+            return tweets_list
+
+        tweets_data = next_response.text
+        tweets_obj = json.loads(tweets_data)
+        if not tweets_obj["has_more_items"] and not tweets_obj["min_position"]:
+            break
+        next_pointer = tweets_obj["min_position"]
+        html = tweets_obj["items_html"]
+        soup = BeautifulSoup(html, 'lxml')
+        tweets_list.extend(get_this_page_tweets(soup))
 
     return tweets_list
 
 
 def function():
-    username = 'Every3Minutes'
-    url = "http://www.twitter.com/every3minutes"
+    username = 'elonmusk'
+    url = "http://www.twitter.com/elonmusk"
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'lxml')
 
